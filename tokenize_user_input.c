@@ -1,0 +1,46 @@
+#include "shell.h"
+
+char **tok_user_input(char *user_input)
+{
+	const char *delimiter = " ";
+	int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
+	char *Token = NULL;
+	char **Tokens = malloc(sizeof(char*) * MaxNumOfTok);
+	
+	if(Tokens == NULL)
+	{
+		perror("Malloc failed to allocate memory for storing tokens");
+		return (NULL);
+	}
+	else
+	{
+		Token = strtok(user_input, delimiter);
+		if (Token == NULL)
+		{
+			perror("Strtok failed to tokenize user input");
+			free(Tokens);
+			return (NULL);
+		}
+		else
+		{
+			
+			while(Token != NULL)
+			{
+				if (NumOfTok == MaxNumOfTok)
+				{
+					MaxNumOfTok = MaxNumOfTok * 2;
+					Tokens = realloc(Tokens, MaxNumOfTok * sizeof(char*));
+					if (Tokens == NULL)
+					{
+					perror("Realloc failed to reallocate memory for storing token");
+					free(Tokens);
+					return(NULL);
+					}
+				}
+				Tokens[NumOfTok++] = Token;                                       
+				Token = strtok(NULL, delimiter);
+			}
+		}
+	}
+	return (Tokens);
+}
