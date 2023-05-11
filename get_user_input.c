@@ -41,9 +41,8 @@ char *get_user_input()
 		{
 			free(user_input);
 			return (NULL);
-		}
-		else
-		{
+			if ((user_input[(user_input_length - 1)] == '\0') ||
+			(user_input[user_input_length - 1] == EOF))
 			user_input[(user_input_length - 1)] = '\0';
 		}
 	}
