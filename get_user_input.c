@@ -26,7 +26,7 @@
 
 char *get_user_input()
 {
-	size_t MAX_USER_INPUT = MAX_BUFFER_LENGTH;
+	size_t MAX_USER_INPUT = BUFFER_SIZE;
 	ssize_t user_input_length;
 	char *user_input = malloc(sizeof(char) * MAX_USER_INPUT);
 
@@ -48,4 +48,3 @@ char *get_user_input()
 	}
 	return (user_input);
 }
-
