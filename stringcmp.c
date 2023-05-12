@@ -14,15 +14,16 @@
 *StringB, Which will always be a non zero number.
 *@StringA: The first string to be compared with another string.
 *@StringB: The second string to be compared with the first string.
+*@a: Limit of the index at which we want to compare both strings.
 *Return: Returns 0 if StringA and StringB are exactly equal.
 *else will return the difference between the ASCII value for Strings A and B.
 */
 
-int stringcmp(char *StringA, char *StringB)
+int stringcmp(char *StringA, char *StringB, int a)
 {
 	int count;
 
-	for (count = 0; (StringA[count] != '\0') && (StringB[count] != '\0'); count++)
+	for (count = 0; (count < a) && (StringA[count] != '\0') && (StringB[count] != '\0'); count++)
 	{
 		if (StringA[count] != StringB[count])
 		return (StringA[count] - StringB[count]);
@@ -36,4 +37,3 @@ int stringcmp(char *StringA, char *StringB)
 		return (StringA[count] - StringB[count]);
 	}
 }
-
