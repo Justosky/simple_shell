@@ -38,13 +38,21 @@ char *get_user_input()
 	{
 		user_input_length = getline(&user_input, &MAX_USER_INPUT, stdin);
 		if (user_input_length == -1)
-		{
+		{	
+			if (errno == EOF)
+			{
+				perror("exiting.......");
+			}
 			free(user_input);
-			return (NULL);
-			if ((user_input[(user_input_length - 1)] == '\0') ||
-			(user_input[user_input_length - 1] == EOF))
-			user_input[(user_input_length - 1)] = '\0';
+			exit (EXIT_SUCCESS);
 		}
+		
+		if ((user_input[(user_input_length - 1)] == '\0') ||
+		(user_input[user_input_length - 1] == '\n'))
+		{
+		user_input[(user_input_length - 1)] = '\0';                  
+                }
+
 	}
 	return (user_input);
 }
