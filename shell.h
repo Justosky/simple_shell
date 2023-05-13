@@ -13,5 +13,6 @@ char *get_user_input();
 char **tokenize(char *user_input, char *delimiter);
 int stringlen(char *String);
 void print(char *String);
+char *get_path(char **envp);
 
 #endif /* End of shell_h */
