@@ -4,50 +4,37 @@
 *stringcat - This function concatenates two strings. It takes two character
 *pointers CompleteString and StringToAdd as arguments. It initializes two
 *interger variables countA and countB which will be used to set a
-*loop condition
-*it initializes another interger variable count and assign it return value
-*of stringlen when CompleteString is passed to it as an argument plus plus
-*return value of stringlen when StringToAdd is passed to it as an argument.
-*It initializes a character pointer FullPath which will be used to store the
-*concatenated strings and allocates memeory to it dynamically using malloc.
-*The size allocated with malloc is of size (length + 1) * sizeof (char). Plus
-*one added to length accounts for the null byte.
-*It checks if memeory allocation was successful else it prints an error message
-*using perror and returns NULL. It copies all contents of CompleteString
-*till into FullPath till it encounters the null byte in CompleteString
+*loop condition. In the first loop, the function is trying to identify
+*the position of the null character in CompleteString which is is the
+*end of the string. CountA is used to keep track of the index of null
+*character in Complete String. In the second for loop, the function
+*Copies the first character in StringToAdd to the position of the last
+*character in the CompleteString perfectly replacing the null byte.
+*CountA is incremented and CountB is incremented to Copy the rest characters
+*from StringToAdd into CompleteString. Outside The loop CompleteString is
+*properly terminated. And CompleteString is now returned.
 *It copies the content of StringToAdd to the end of the last character
-*in FullPath untill it meets the null byte in StringToAdd.
-*It terminates the FullPath String properly by adding a null byte to the end.
-*It then returns FullPath which is our concatenated string.
+*in CompleteString untill it meets the null byte in StringToAdd.
+*It terminates the CompleteString properly by adding a null byte to the end.
+*It then returns CompleteString which is our concatenated string.
 *@CompleteString: The destination string
 *@StringToAdd: The destination string
 *Return: Returns a pointer which contains the concatenate of CompleteString
 *and StringToAdd.
-*and it is the responsibility of the engineer to free FullPath after use.
 */
 
 char *stringcat(char *CompleteString, char *StringToAdd)
 {
-	int countA, countB;
+	int CountA, CountB;
 
-	int length = (stringlen(CompleteString) + stringlen(StringToAdd));
-
-	char *FullString = malloc((length + 1) * sizeof(char));
-
-	if (FullString == NULL)
+	for (CountA = 0; CompleteString[CountA] != '\0'; CountA++)
 	{
-		perror("Malloc() failed to allocate memory to concatenate strings");
-		return (NULL);
 	}
 
-	for (countA = 0; CompleteString[countA] != '\0'; countA++)
+	for (CountB = 0; StringToAdd[CountB] != '\0'; CountB++)
 	{
-		FullString[countA] = CompleteString[countA];
+		CompleteString[CountA++] = StringToAdd[CountB];
 	}
-	for (countB = 0; StringToAdd[countB] != '\0'; countB++)
-	{
-		FullString[countA++] = StringToAdd[countB];
-	}
-	FullString[countA] = '\0';
-	return (FullString);
+	CompleteString[CountA] = '\0';
+	return (CompleteString);
 }
