@@ -24,7 +24,7 @@ the value of path. The function initializes a character pointer
 
 char *get_path(char **envp)
 {
-	char *path;
+	char *path = NULL;
 	int count;
 
 	if (envp == NULL)
