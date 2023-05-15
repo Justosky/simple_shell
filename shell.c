@@ -20,5 +20,9 @@ int main(int argc, char **argv, char **envp)
 			printf("%s", FullPath[count]);
 		}
 	}
+	free(path);
+	free(tok_path);
+	free(token);
+	free(FullPath);
 	return (0);
 }
