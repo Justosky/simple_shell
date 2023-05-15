@@ -53,7 +53,7 @@ char **tokenize(char *user_input, char *delimiter)
 		
 		if (Token == NULL)
 		{
-			/*perror("Strtok failed to tokenize user input");*/
+			perror("Strtok failed to tokenize user input");
 			return (Tokens);
 		}
 		else
