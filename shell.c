@@ -3,33 +3,32 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	int CountA, CountB, CountC, CountD;
+	int CountA;
 	char *Input;
 	char **TokUserInput;
 	char **FullPath;
 	char *Path = get_path(envp);
-	char **TokPath = tokenize(Path, ":");
+	char **TokPath = tokenize(Path, ":\n");
 	char **arg;
 	for (;;)
 	{
 		print(" ($) ");
 		Input = get_user_input();
-		TokUserInput = tokenize(Input,"");
-		FullPath = full(TokPath, TokUserInput[0]);
-		printf("PATH IS %s\n", FullPath[1]);
+		TokUserInput = tokenize(Input," \n");
+		FullPath = full(TokPath, *TokUserInput);
 		args(FullPath, TokUserInput, envp);
 	}	
-	for (CountB = 0; TokUserInput[CountB] != NULL; CountB++)
+	for (CountA = 0; TokUserInput[CountA] != NULL; CountA++)
 	{
-		free(TokUserInput[CountB]);
+		free(TokUserInput[CountA]);
 	}
-	for (CountB = 0; TokPath[CountB] != NULL; CountB++)
+	for (CountA = 0; TokPath[CountA] != NULL; CountA++)
 	{
-		free(TokPath[CountB]);
+		free(TokPath[CountA]);
 	}
-	for (CountB = 0; FullPath[CountB] != NULL; CountB++)
+	for (CountA = 0; FullPath[CountA] != NULL; CountA++)
 	{
-		free(FullPath[CountB]);
+		free(FullPath[CountA]);
 	}
 	free(Input);
 	free(TokUserInput);

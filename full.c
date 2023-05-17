@@ -34,10 +34,9 @@ char **full(char **TokPath, char *TokUserInput)
         stringcpy(FullPath[CountA], TokPath[CountA]);
         stringcat(FullPath[CountA], "/");
         stringcat(FullPath[CountA], TokUserInput);
-        FullPath[CountA][Len - 1] = '\0';
+        FullPath[CountA][Len] = '\0';
     }
 
     FullPath[CountA] = NULL;
     return FullPath;
 }
-

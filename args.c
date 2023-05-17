@@ -4,12 +4,13 @@ void args(char **FullPath, char **TokUserInput, char **envp)
 {
     int a, b, c, lena;
     char **args;
+	pid_t PID;
 
     for (a = 0; TokUserInput[a] != NULL; a++)
     {
     }
 
-    args = malloc(sizeof(char *) * (a + 2));
+    args = malloc(sizeof(char *) * (a + 1));
     if (args == NULL)
     {
         perror("malloc() failed to allocate memory for args");
@@ -30,7 +31,6 @@ void args(char **FullPath, char **TokUserInput, char **envp)
             }
             stringcpy(args[0], FullPath[b]);
             args[0][lena - 1] = '\0';
-            printf("FULLPATH IS %s\n", FullPath[b]);
 
             for (c = 0; TokUserInput[c + 1] != NULL; c++)
             {
@@ -45,11 +45,9 @@ void args(char **FullPath, char **TokUserInput, char **envp)
                 stringcpy(args[c + 1], TokUserInput[c + 1]);
                 args[c + 1][lena - 1] = '\0';
             }
-
             args[c + 1] = NULL;
-            printf("ARG IS %s\n", args[0]);
-            execve(FullPath[b], args, envp);
         }
+		execve(FullPath[b], args, envp);	
     }
 }
 

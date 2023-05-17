@@ -71,15 +71,15 @@ char **tokenize(char *user_input, char *delimiter)
                         return NULL;
                     }
                 }
-                Tokens[NumOfTok] = malloc(strlen(Token) + 1);  // Allocate memory for token
+                Tokens[NumOfTok] = malloc(stringlen(Token));  // Allocate memory for token
                 if (Tokens[NumOfTok] == NULL)
                 {
                     perror("Malloc failed to allocate memory for token");
                     free(Tokens);
                     return NULL;
                 }
-                strcpy(Tokens[NumOfTok], Token);  // Copy token contents
-                //Tokens[NumOfTok][strlen(Token)] = '\0';  // Null-terminate the token
+                stringcpy(Tokens[NumOfTok], Token);  // Copy token contents
+                Tokens[NumOfTok][stringlen(Token)] = '\0';  // Null-terminate the token
                 NumOfTok++;
                 Token = strtok(NULL, delimiter);
             }
