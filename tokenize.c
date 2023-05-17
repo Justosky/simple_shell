@@ -38,45 +38,54 @@
 
 char **tokenize(char *user_input, char *delimiter)
 {
-	int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
-	char *Token = NULL;
-	char **Tokens = malloc(sizeof(char *) * MaxNumOfTok);
+    int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
+    char *Token = NULL;
+    char **Tokens = malloc(sizeof(char *) * (MaxNumOfTok + 1));
 
-	if (Tokens == NULL)
-	{
-		perror("Malloc failed to allocate memory for storing tokens");
-		return (NULL);
-	}
-	else
-	{
-		Token = strtok(user_input, delimiter);
-		
-		if (Token == NULL)
-		{
-			perror("Strtok failed to tokenize user input");
-			return (Tokens);
-		}
-		else
-		{
+    if (Tokens == NULL)
+    {
+        perror("Malloc failed to allocate memory for storing tokens");
+        return NULL;
+    }
+    else
+    {
+        Token = strtok(user_input, delimiter);
 
-			while (Token != NULL)
-			{
-				if (NumOfTok == MaxNumOfTok)
-				{
-					MaxNumOfTok = MaxNumOfTok * 2;
-					Tokens = realloc(Tokens, MaxNumOfTok * sizeof(char *));
-					if (Tokens == NULL)
-					{
-					perror("Realloc failed to reallocate memory for storing token");
-					free(Tokens);
-					return (NULL);
-					}
-				}
-				Tokens[NumOfTok++] = Token;
-				Token = strtok(NULL, delimiter);
-			}
-		}
-	}
-	return (Tokens);
+        if (Token == NULL)
+        {
+            perror("Strtok failed to tokenize user input");
+            return Tokens;
+        }
+        else
+        {
+            while (Token != NULL)
+            {
+                if (NumOfTok == MaxNumOfTok)
+                {
+                    MaxNumOfTok = MaxNumOfTok * 2;
+                    Tokens = realloc(Tokens, (MaxNumOfTok + 1) * sizeof(char *));
+                    if (Tokens == NULL)
+                    {
+                        perror("Realloc failed to reallocate memory for storing token");
+                        free(Tokens);
+                        return NULL;
+                    }
+                }
+                Tokens[NumOfTok] = malloc(strlen(Token) + 1);  // Allocate memory for token
+                if (Tokens[NumOfTok] == NULL)
+                {
+                    perror("Malloc failed to allocate memory for token");
+                    free(Tokens);
+                    return NULL;
+                }
+                strcpy(Tokens[NumOfTok], Token);  // Copy token contents
+                //Tokens[NumOfTok][strlen(Token)] = '\0';  // Null-terminate the token
+                NumOfTok++;
+                Token = strtok(NULL, delimiter);
+            }
+        }
+    }
+    Tokens[NumOfTok] = NULL;  // Set the last element of Tokens to NULL
+    return Tokens;
 }
 

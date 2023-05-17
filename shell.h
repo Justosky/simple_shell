@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <errno.h>
+#include <sys/wait.h>
 #define BUFFER_SIZE 1024
 
 int stringcmp(char *StringA, char *StringB, int a);
@@ -20,5 +21,8 @@ char *stringcat(char *CompleteString, char *StringToAdd);
 char **full_path(char **tok_path, char **tok_user_input);
 char **init_envp(char **envp);
 char *stringcpy(char *StringDest, char *StringSource);
+char **full(char **TokPath, char *TokUserInput);
+int half_len(char **half);
+void args(char **FullPath, char **TokUserInput, char **envp);
 
 #endif /* End of shell_h */
