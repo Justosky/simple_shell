@@ -16,7 +16,9 @@ int main(int argc, char **argv, char **envp)
 		print(" ($) ");
 		Input = get_user_input();
 		TokUserInput = tokenize(Input," \n");
-		FullPath = full(TokPath, *TokUserInput);
+		if (TokUserInput[0] == NULL)
+		TokUserInput[0] = " \n";
+		FullPath = full(TokPath, TokUserInput[0]);
 		CountB = half_len(FullPath);
 		for (CountA = 0; (CountA < CountB) && access(FullPath[CountA], X_OK) != 0; CountA++)
 		{}
@@ -34,6 +36,10 @@ int main(int argc, char **argv, char **envp)
 		}
 		else
 		{
+			if (stringcmp(TokUserInput[0], "exit", 3) == 0)
+			{
+				exit(EXIT_SUCCESS);
+			}
 			print(TokUserInput[0]);
 			print(":");
 			print(" ");

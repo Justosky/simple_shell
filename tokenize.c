@@ -54,7 +54,6 @@ char **tokenize(char *user_input, char *delimiter)
         if (Token == NULL)
         {
             perror("Strtok failed to tokenize user input");
-            return Tokens;
         }
         else
         {
@@ -68,7 +67,7 @@ char **tokenize(char *user_input, char *delimiter)
                     {
                         perror("Realloc failed to reallocate memory for storing token");
                         free(Tokens);
-                        return NULL;
+                        return (NULL);
                     }
                 }
                 Tokens[NumOfTok] = malloc(stringlen(Token));  // Allocate memory for token
@@ -79,7 +78,6 @@ char **tokenize(char *user_input, char *delimiter)
                     return NULL;
                 }
                 stringcpy(Tokens[NumOfTok], Token);  // Copy token contents
-                Tokens[NumOfTok][stringlen(Token)] = '\0';  // Null-terminate the token
                 NumOfTok++;
                 Token = strtok(NULL, delimiter);
             }
