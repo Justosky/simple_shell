@@ -9,8 +9,8 @@ int main(int argc, char **argv, char **envp)
 	char **FullPath;
 	char *Path = get_path(envp);
 	char **TokPath = tokenize(Path, ":\n");
-	char **arg;
 	pid_t PID;
+	(void) argc, (void) argv, (void) envp;
 	for (;;)
 	{
 		print(" ($) ");
@@ -44,6 +44,13 @@ int main(int argc, char **argv, char **envp)
 			print(":");
 			print(" ");
 			print("command not found\n");
+			if (stringcmp(TokUserInput[0], "env", 2) == 0)
+			{
+				for (CountA = 0; envp[CountA] != NULL; CountA++)
+				{
+					print(envp[CountA]);
+				}
+			}
 		}
 	}	
 	for (CountA = 0; TokUserInput[CountA] != NULL; CountA++)
