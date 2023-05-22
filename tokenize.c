@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-*tok_user_input - This function takes a character pointer
+*tokenize - This function takes a character pointer
 *which contains the string that we want to tokenize as an argument.
 *It initializes a character constant pointer
 *character pointer delimiter with a string literal which will be used
@@ -20,8 +20,8 @@
 *frees the Tokens memory
 *allocated by malloc and returns NULL.
 *Else it checks if NumOfTok is equal to MaxNumOfTok and reallocates memory for
-*Tokens to handle the new characters It checks if reallocation of memory failed
-*and frees the memory held by Token and return NULL.
+*Tokens to handle the new characters It checks if reallocation of
+*memory faile*d and frees the memory held by Token and return NULL.
 *Else it stores the first Token at the 0th index of Tokens double pointer
 *It updates Token to hold the memory address of the next token in the
 *user_input string By passing it the return value of strtok when NULL and
@@ -30,7 +30,8 @@
 *The user of this function will be responsible in freeing Tokens in
 *the main function. To understand clearly how this function works read
 *about strtok() function.
-*@user_input: A pointer which holds the memory address of the string 
+*@user_input: A pointer which holds the memory address of the string
+*@delimiter: A string that we will use to tokenize user_input
 *that we want to tokenize.
 *Return: This function returns a double pointer which contains
 *the tokenized strings.
@@ -38,52 +39,50 @@
 
 char **tokenize(char *user_input, char *delimiter)
 {
-    int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
-    char *Token = NULL;
-    char **Tokens = malloc(sizeof(char *) * (MaxNumOfTok + 1));
+	int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
+	char *Token = NULL;
+	char **Tokens = malloc(sizeof(char *) * (MaxNumOfTok + 1));
 
-    if (Tokens == NULL)
-    {
-        perror("Malloc failed to allocate memory for storing tokens");
-        return NULL;
-    }
-    else
-    {
-        Token = strtok(user_input, delimiter);
-
-        if (Token == NULL)
-        {
-            perror("Strtok failed to tokenize user input");
-        }
-        else
-        {
-            while (Token != NULL)
-            {
-                if (NumOfTok == MaxNumOfTok)
-                {
-                    MaxNumOfTok = MaxNumOfTok * 2;
-                    Tokens = realloc(Tokens, (MaxNumOfTok + 1) * sizeof(char *));
-                    if (Tokens == NULL)
-                    {
-                        perror("Realloc failed to reallocate memory for storing token");
-                        free(Tokens);
-                        return (NULL);
-                    }
-                }
-                Tokens[NumOfTok] = malloc(stringlen(Token));
-                if (Tokens[NumOfTok] == NULL)
-                {
-                    perror("Malloc failed to allocate memory for token");
-                    free(Tokens);
-                    return NULL;
-                }
-                stringcpy(Tokens[NumOfTok], Token);
-                NumOfTok++;
-                Token = strtok(NULL, delimiter);
-            }
-        }
-    }
-    Tokens[NumOfTok] = NULL;
-    return Tokens;
+	if (Tokens == NULL)
+	{
+		perror("Malloc failed to allocate memory for storing tokens");
+		return (NULL);
+	}
+	else
+	{
+		Token = strtok(user_input, delimiter);
+		if (Token == NULL)
+		{
+			perror("Strtok failed to tokenize user input");
+		}
+		else
+		{
+			while (Token != NULL)
+		{
+			if (NumOfTok == MaxNumOfTok)
+		{
+			MaxNumOfTok = MaxNumOfTok * 2;
+			Tokens = realloc(Tokens, (MaxNumOfTok + 1) * sizeof(char *));
+			if (Tokens == NULL)
+			{
+				perror("Realloc failed to reallocate memory for storing token");
+				free(Tokens);
+				return (NULL);
+			}
+		}
+		Tokens[NumOfTok] = malloc(stringlen(Token));
+		if (Tokens[NumOfTok] == NULL)
+		{
+			perror("Malloc failed to allocate memory for token");
+			free(Tokens);
+			return (NULL);
+		}
+		stringcpy(Tokens[NumOfTok], Token);
+		NumOfTok++;
+		Token = strtok(NULL, delimiter);
+		}
+	}
 }
-
+	Tokens[NumOfTok] = NULL;
+	return (Tokens);
+}
