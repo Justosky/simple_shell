@@ -4,11 +4,11 @@
 *stringcmp - Similar to the standard library function strcmp. This function
 *Takes two char pointers StringA and StringB which contains the strings that
 *we want to compare. It uses a for loop to check if StringA and StringB at
-*same index are not equal to null character. If one of the strings reaches
+*same index are not equal to NULL character. If one of the strings reaches
 *the null terminator and the other has not the statement evaluate to false,
-*If both of them reaches the null terminator at same index the statement
+*If both of them reaches the NULL terminator at same index the statement
 *evaluate to false too. After coming out of the loop.
-*we check at the current index of the two strings if they both contain null.
+*we check at the current index of the two strings if they both contain NULL.
 *if so we return 0. Indicating that the two strings are equal.
 *Else we will return the difference between the ASCII value of StringA and
 *StringB, Which will always be a non zero number.
