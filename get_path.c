@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-**get_path - This function gets the value of PATH environmental variable
+* *get_path - This function gets the value of PATH environmental variable
 *as it is on a user computer. It exlude this string "PATH=" from
 *the value of path. The function initializes a character pointer
 *path which we will use to store the value of PATH. It initializes
