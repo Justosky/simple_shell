@@ -14,9 +14,9 @@
 *We check if getline was able to read input from the standard input file stream
 *If it doesnt we free the memory allocated for user_input and
 *return a NULL pointer
-*Else we add a null terminator at after the last character in user_input.
+*Else we add a NULL terminator at after the last character in user_input.
 *That will enable us to manipulate user_input as string since every string must
-*be terminated by a null character.
+*be terminated by a NULL character.
 *After doing that we go ahead and return user_input string.
 *The user is responsible for freeing user_input after use in the main function
 *Read more on getline() function to understand how this function works.
