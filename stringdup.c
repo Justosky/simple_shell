@@ -13,8 +13,8 @@
 *message and return NULL. Else it uses a for loop to copy the content of
 *StringToDup which is the string to be duplicated into DupString which will
 *become our duplicated string at same index untill StringToDup at a particular
-*index contains the null byte which marks the end of the string. After coming
-*out of the loop. It sets the last index of DupString to nullbyte properly
+*index contains the NULL byte which marks the end of the string. After coming
+*out of the loop. It sets the last index of DupString to NULL byte properly
 *terminating the string. It then returns the
 *the duplicated string DupString.
 *@StringToDup: The string that is to be duplicated.
