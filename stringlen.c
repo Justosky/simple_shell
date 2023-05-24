@@ -7,9 +7,9 @@
 *prints an error message and return (count - 1) which is same as -1
 *Else it checks if String at an index of count contains the null character
 *it increments count and the loop continues till String at an index of count
-*becomes null. When the loop breaks it returns the current value of count
+*becomes NULL. When the loop breaks it returns the current value of count
 *which is the total number of characters within the string excluding the
-*null byte.
+*NULL byte.
 *@String: The string that it's length is to be calculated.
 *Return: The function returns count on success or (count - 1) on failure.
 */
