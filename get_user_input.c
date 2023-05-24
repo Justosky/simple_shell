@@ -38,16 +38,16 @@ char *get_user_input()
 	{
 		user_input_length = getline(&user_input, &MAX_USER_INPUT, stdin);
 		if (user_input_length == -1)
-		{	
+		{
 			if (errno == EOF)
 			{
 				perror("exiting.......");
 			}
 			free(user_input);
-			exit (EXIT_SUCCESS);
+			exit(EXIT_SUCCESS);
 		}
 		if ((user_input[user_input_length - 1] == '\0') ||
-		(user_input[user_input_length - 1] == EOF) || 
+		(user_input[user_input_length - 1] == EOF) ||
 		(user_input[user_input_length - 1] == '\n'))
 		{
 			user_input[user_input_length - 1] = '\0';

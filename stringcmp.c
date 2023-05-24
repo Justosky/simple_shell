@@ -23,7 +23,8 @@ int stringcmp(char *StringA, char *StringB, int a)
 {
 	int count;
 
-	for (count = 0; (count < a) && (StringA[count] != '\0') && (StringB[count] != '\0'); count++)
+	for (count = 0; (count < a) && (StringA[count] != '\0') &&
+	(StringB[count] != '\0'); count++)
 	{
 		if (StringA[count] != StringB[count])
 		return (StringA[count] - StringB[count]);
