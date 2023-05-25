@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * main - Entry point of the program
+ *
+ * Return: 0 on success, otherwise an error code
+ */
 
 int main(int argc, char **argv, char **envp)
 {
@@ -15,12 +20,12 @@ int main(int argc, char **argv, char **envp)
 	{
 		print(" ($) ");
 		Input = get_user_input();
-		TokUserInput = tokenize(Input," \n");
+		TokUserInput = tokenize(Input, " \n");
 		if (TokUserInput[0] == NULL)
 		TokUserInput[0] = " \n";
 		FullPath = full(TokPath, TokUserInput[0]);
 		CountB = half_len(FullPath);
-		for (CountA = 0; (CountA < CountB) && access(FullPath[CountA], X_OK) != 0; CountA++)
+		for (CountA = 0; (CountA<CountB) && access(FullPath[CountA], X_OK) != 0; CountA++)
 		{}
 		if (access(FullPath[CountA], X_OK) == 0)
 		{
@@ -52,7 +57,7 @@ int main(int argc, char **argv, char **envp)
 				}
 			}
 		}
-	}	
+	}
 	for (CountA = 0; TokUserInput[CountA] != NULL; CountA++)
 	{
 		free(TokUserInput[CountA]);

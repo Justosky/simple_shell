@@ -30,23 +30,31 @@
 *The user of this function will be responsible in freeing Tokens in
 *the main function. To understand clearly how this function works read
 *about strtok() function.
-*@user_input: A pointer which holds the memory address of the string 
+*@user_input: A pointer which holds the memory address of the string
 *that we want to tokenize.
 *Return: This function returns a double pointer which contains
 *the tokenized strings.
 */
 
+/**
+* tokenize - Split a string into tokens based on a delimiter
+*
+* @str: The input string to be tokenized
+* @delimiter: The character used to separate tokens
+*
+* Return: An array of tokens
+*/
 char **tokenize(char *user_input, char *delimiter)
 {
-    int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
-    char *Token = NULL;
-    char **Tokens = malloc(sizeof(char *) * (MaxNumOfTok + 1));
+	int NumOfTok = 0, MaxNumOfTok = BUFFER_SIZE;
+	char *Token = NULL;
+	char **Tokens = malloc(sizeof(char *) * (MaxNumOfTok + 1));
 
-    if (Tokens == NULL)
-    {
+	if (Tokens == NULL)
+	{
         perror("Malloc failed to allocate memory for storing tokens");
         return NULL;
-    }
+	}
     else
     {
         Token = strtok(user_input, delimiter);
