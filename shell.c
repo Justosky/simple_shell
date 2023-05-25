@@ -2,20 +2,21 @@
 
 /**
  * main - Entry point of the program
- *
+ *@argc: argument counter
+ *@argv: argument vector
+ *@envp:  environment variables
  * Return: 0 on success, otherwise an error code
  */
 
 int main(int argc, char **argv, char **envp)
 {
-	int CountA, CountB;
+	int CountA;
 	char *Input;
 	char **TokUserInput;
 	char **FullPath;
 	char *Path = get_path(envp);
 	char **TokPath = tokenize(Path, ":\n");
-	pid_t PID;
-	(void) argc, (void) argv, (void) envp;
+	(void) argc, (void) argv;
 	for (;;)
 	{
 		print(" ($) ");
@@ -24,23 +25,8 @@ int main(int argc, char **argv, char **envp)
 		if (TokUserInput[0] == NULL)
 		TokUserInput[0] = " \n";
 		FullPath = full(TokPath, TokUserInput[0]);
-		CountB = half_len(FullPath);
-		for (CountA = 0; (CountA<CountB) && access(FullPath[CountA], X_OK) != 0; CountA++)
-		{}
-		if (access(FullPath[CountA], X_OK) == 0)
-		{
-		PID = fork();
-		if (PID == 0)
-		{
-			execve(FullPath[CountA], TokUserInput, envp);
-		}
-		else if (PID > 0)
-		{
-			wait(NULL);
-		}
-		}
-		else
-		{
+		execute_with_path(FullPath, TokUserInput, envp);
+	}
 			if (stringcmp(TokUserInput[0], "exit", 3) == 0)
 			{
 				exit(EXIT_SUCCESS);
@@ -56,23 +42,9 @@ int main(int argc, char **argv, char **envp)
 					print(envp[CountA]);
 				}
 			}
-		}
-	}
-	for (CountA = 0; TokUserInput[CountA] != NULL; CountA++)
-	{
-		free(TokUserInput[CountA]);
-	}
-	for (CountA = 0; TokPath[CountA] != NULL; CountA++)
-	{
-		free(TokPath[CountA]);
-	}
-	for (CountA = 0; FullPath[CountA] != NULL; CountA++)
-	{
-		free(FullPath[CountA]);
-	}
-	free(Input);
-	free(TokUserInput);
-	free(TokPath);
-	free(FullPath);
+	free_string(Input);
+	free_string_arrays(TokUserInput);
+	free_string_arrays(TokPath);
+	free_string_arrays(FullPath);
 	return (0);
 }
