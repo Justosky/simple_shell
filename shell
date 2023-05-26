@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **envp)
 	(void) argc, (void) argv;
 	for (;;)
 	{
-		print(" ($) ");
+		print("#cisfun$ ");
 		Input = get_user_input();
 		TokUserInput = tokenize(Input, " \n");
 		if (TokUserInput[0] == NULL)
